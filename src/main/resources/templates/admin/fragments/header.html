@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="header">
+    <header class="flex justify-between bg-gray-700 text-white h-16">
+        <div class="mx-4 h-full text-2xl font-hairline" style="line-height:3.9rem;">Goenitz</div>
+        <div class="mx-4 text-white text-sm" style="line-height:3.9rem;">
+            Welcome <span th:text="username"></span>.&nbsp;
+            <a class="text-blue-400" th:href="@{/logout}">logout.</a>
+        </div>
+    </header>
+</div>
+</body>
+</html>

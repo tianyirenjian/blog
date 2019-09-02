@@ -10,16 +10,15 @@ import xyz.goenitz.blog.model.User;
 import xyz.goenitz.blog.repository.UserRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class BlogApplication implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
-    @Value("${user.default.username}")
+
+    @Value("${user.default.username:username}")
     private String username;
-    @Value("${user.default.password}")
+    @Value("${user.default.password:password}")
     private String password;
 
     public static void main(String[] args) {
