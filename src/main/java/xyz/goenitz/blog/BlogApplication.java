@@ -27,7 +27,6 @@ public class BlogApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user;
         List<User> users = userRepository.findAll();
         if (0 == users.size()) {
             password = new BCryptPasswordEncoder().encode(password);

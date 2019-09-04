@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}"></title>
+    <th:block th:insert="admin/fragments/style::style"></th:block>
+</head>
+<body class="min-h-full flex flex-col text-gray-900">
+<div class="flex flex-col flex-1">
+    <div th:insert="admin/fragments/header::header"></div>
+    <div class="main flex flex-row flex-1">
+        <div class="slider w-1/6 p-2 bg-gray-800 text-gray-100 text-lg" th:insert="admin/fragments/slider::slider"></div>
+        <div class="body w-2/5 p-3 flex flex-col">
+            <div class="flex-1">
+                <h1 class="text-lg font-bold">New Post <small><a class="text-blue-400" th:href="@{/admin/posts}">Back to list</a></small></h1>
+                <form class="mt-2" th:action="@{/admin/posts}" method="post" th:object="${post}">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                        Title
+                    </label>
+                    <input type="text" id="title" placeholder="Title" th:field="*{title}" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="slug">
+                        Slug
+                    </label>
+                    <input type="text" id="slug" placeholder="Slug" th:field="*{slug}" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea id="description" rows="5" th:field="*{description}" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="content">
+                        Content
+                    </label>
+                    <textarea id="content" rows="10" th:field="*{content}" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="tags">
+                        Tags
+                    </label>
+                    <input type="text" id="tags" th:field="*{tags}" placeholder="Tags split with ','" class="shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <div id="tag-holder">
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white mt-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Submit
+                    </button>
+                </form>
+            </div>
+            <div th:replace="admin/fragments/footer::footer">footer</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

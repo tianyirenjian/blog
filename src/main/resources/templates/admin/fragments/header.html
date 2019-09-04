@@ -13,7 +13,7 @@
     <header class="flex justify-between bg-blue-600 text-white h-16">
         <div class="mx-4 h-full text-2xl font-hairline" style="line-height:3.9rem;">Goenitz</div>
         <div class="mx-4 text-gray-100 text-sm" style="line-height:3.9rem;">
-            Welcome <span th:text="username"></span>.&nbsp;
+            Welcome <span th:text="${username}"></span>.&nbsp;
             <a class="text-blue-400" th:href="@{/logout}">logout.</a>
         </div>
     </header>

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,6 +19,8 @@ public class Post {
 
     private boolean show = false;
     private boolean markdown = true;
+
+    private List<String> tags;
 
     private Instant created, updated;
 }
