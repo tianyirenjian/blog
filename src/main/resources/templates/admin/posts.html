@@ -33,8 +33,8 @@
                         <td class="td" th:text="${post.slug}">slug</td>
                         <td class="td" th:text="${post.views}">views</td>
                         <td class="td" th:text="${post.tags}">tags</td>
-                        <td class="td" th:text="${post.created}">created</td>
-                        <td class="td" th:text="${post.updated}">updated</td>
+                        <td class="td" th:text="${#dates.format(post.created, 'yyyy-MM-dd HH:mm:ss')}">created</td>
+                        <td class="td" th:text="${#dates.format(post.updated, 'yyyy-MM-dd HH:mm:ss')}">updated</td>
                         <td class="td">action</td>
                     </tr>
                     </th:block>

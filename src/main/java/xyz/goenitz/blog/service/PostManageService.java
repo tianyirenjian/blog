@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.goenitz.blog.model.Post;
 import xyz.goenitz.blog.repository.PostRepository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -17,6 +18,8 @@ public class PostManageService {
     }
 
     public void createPost(Post post) {
+        post.setCreated(Instant.now());
+        post.setUpdated(Instant.now());
         postRepository.save(post);
     }
 }

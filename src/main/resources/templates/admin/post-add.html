@@ -20,6 +20,7 @@
                         Title
                     </label>
                     <input type="text" id="title" placeholder="Title" th:field="*{title}" class="input">
+                    <p class="error-message" th:if="${errors['title']}" th:text="title + ${errors['title']}"></p>
                     <label class="label" for="slug">
                         Slug
                     </label>
@@ -28,10 +29,12 @@
                         Description
                     </label>
                     <textarea id="description" rows="5" th:field="*{description}" class="input"></textarea>
+                    <p class="error-message" th:if="${errors['description']}" th:text="description + ${errors['description']}"></p>
                     <label class="label" for="content">
                         Content
                     </label>
                     <textarea id="content" rows="10" th:field="*{content}" class="input"></textarea>
+                    <p class="error-message" th:if="${errors['content']}" th:text="content + ${errors['content']}"></p>
                     <label class="label" for="tags">
                         Tags
                     </label>

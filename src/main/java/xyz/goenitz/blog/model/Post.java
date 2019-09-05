@@ -4,7 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -13,7 +17,10 @@ public class Post {
     @Id
     private String id;
 
-    private String title, slug, content, description;
+    @NotEmpty
+    private String title, content, description;
+
+    private String slug;
 
     private long views;
 

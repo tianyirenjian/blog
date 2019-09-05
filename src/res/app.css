@@ -39,3 +39,7 @@ html {
 .sbtn:focus {
     @apply outline-none shadow-outline;
 }
+
+.error-message {
+    @apply text-sm mt-1 text-red-600;
+}
