@@ -8,8 +8,7 @@
     <title th:text="${title}"></title>
     <th:block th:insert="admin/fragments/style::style"></th:block>
 </head>
-<body class="min-h-full flex flexcol text-gray-900">
-<div class="flex flex-col flex-1">
+<body class="min-h-full flex flex-col text-gray-900">
     <div th:insert="admin/fragments/header::header"></div>
     <div class="main flex flex-row flex-1">
         <div class="slider w-1/6 p-2 bg-gray-800 text-gray-100 text-lg" th:insert="admin/fragments/slider::slider"></div>
@@ -47,6 +46,5 @@
             <div th:replace="admin/fragments/footer::footer">footer</div>
         </div>
     </div>
-</div>
 </body>
 </html>
