@@ -1,0 +1,41 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+html {
+    height: 100%;
+}
+
+.th {
+    @apply border border-gray-400 p-2;
+}
+
+.td {
+    @apply border border-gray-400 text-center text-sm p-2;
+}
+
+.label {
+    @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+.input:focus {
+    @apply  outline-none shadow-outline;
+}
+
+.sbtn {
+    @apply bg-blue-500 text-white mt-2 font-bold py-2 px-4 rounded;
+}
+
+.sbtn:hover {
+    @apply bg-blue-700;
+}
+
+.sbtn:focus {
+    @apply outline-none shadow-outline;
+}

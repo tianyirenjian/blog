@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### VIM ###
+*.swp
+
+### Asserts ###
+node_modules
+mix-manifest.json

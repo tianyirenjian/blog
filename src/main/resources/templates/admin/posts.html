@@ -18,25 +18,25 @@
                 <h1 class="text-lg font-bold">Posts <small><a class="text-blue-400" th:href="@{/admin/posts/create}">new post</a></small></h1>
                 <table class="border-collapse max-w-full mt-2">
                     <tr>
-                        <th class="border border-gray-400 p-2">ID</th>
-                        <th class="border border-gray-400 p-2">Title</th>
-                        <th class="border border-gray-400 p-2">Slug</th>
-                        <th class="border border-gray-400 p-2">Views</th>
-                        <th class="border border-gray-400 p-2">Tags</th>
-                        <th class="border border-gray-400 p-2">Created</th>
-                        <th class="border border-gray-400 p-2">Updated</th>
-                        <th class="border border-gray-400 p-2">Action</th>
+                        <th class="th">ID</th>
+                        <th class="th">Title</th>
+                        <th class="th">Slug</th>
+                        <th class="th">Views</th>
+                        <th class="th">Tags</th>
+                        <th class="th">Created</th>
+                        <th class="th">Updated</th>
+                        <th class="th">Action</th>
                     </tr>
                     <th:block th:each="post: ${posts}">
                     <tr class="border border-gray-400">
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.id}"></td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.title}">title</td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.slug}">slug</td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.views}">views</td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.tags}">tags</td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.created}">created</td>
-                        <td class="border border-gray-400 text-center text-sm p-2" th:text="${post.updated}">updated</td>
-                        <td class="border border-gray-400 text-center text-sm p-2">action</td>
+                        <td class="td" th:text="${post.id}"></td>
+                        <td class="td" th:text="${post.title}">title</td>
+                        <td class="td" th:text="${post.slug}">slug</td>
+                        <td class="td" th:text="${post.views}">views</td>
+                        <td class="td" th:text="${post.tags}">tags</td>
+                        <td class="td" th:text="${post.created}">created</td>
+                        <td class="td" th:text="${post.updated}">updated</td>
+                        <td class="td">action</td>
                     </tr>
                     </th:block>
                 </table>
