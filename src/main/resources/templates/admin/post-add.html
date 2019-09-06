@@ -9,32 +9,28 @@
     <th:block th:insert="admin/fragments/style::style"></th:block>
 </head>
 <body class="min-h-full flex flex-col text-gray-900">
-    <div th:insert="admin/fragments/header::header"></div>
+    <th:block th:insert="admin/fragments/header::header"></th:block>
     <div class="main flex flex-row flex-1">
         <div class="slider w-1/6 p-2 bg-gray-800 text-gray-100 text-lg" th:insert="admin/fragments/slider::slider"></div>
         <div class="body w-2/5 p-3 flex flex-col">
             <div class="flex-1">
-                <h1 class="text-lg font-bold">New Post <small><a class="text-blue-400" th:href="@{/admin/posts}">Back to list</a></small></h1>
-                <form class="mt-2" th:action="@{/admin/posts}" method="post" th:object="${post}">
+                <h1 class="text-lg font-bold"><span th:text="${title}"></span> <small><a class="text-blue-400" th:href="@{/admin/posts}">Back to list</a></small></h1>
+                <form class="mt-2" th:action="${post.id} ? @{/admin/posts/{id}/update(id=${post.id})} : @{/admin/posts}" method="post" th:object="${post}">
                     <label class="label" for="title">
                         Title
                     </label>
                     <input type="text" id="title" placeholder="Title" th:field="*{title}" class="input">
-                    <p class="error-message" th:if="${errors['title']}" th:text="title + ${errors['title']}"></p>
-                    <label class="label" for="slug">
-                        Slug
-                    </label>
-                    <input type="text" id="slug" placeholder="Slug" th:field="*{slug}" class="input">
+                    <p class="error-message" th:if="${errors['title']}" th:text="'title ' + ${errors['title']}"></p>
                     <label class="label" for="description">
                         Description
                     </label>
                     <textarea id="description" rows="5" th:field="*{description}" class="input"></textarea>
-                    <p class="error-message" th:if="${errors['description']}" th:text="description + ${errors['description']}"></p>
+                    <p class="error-message" th:if="${errors['description']}" th:text="'description ' + ${errors['description']}"></p>
                     <label class="label" for="content">
                         Content
                     </label>
                     <textarea id="content" rows="10" th:field="*{content}" class="input"></textarea>
-                    <p class="error-message" th:if="${errors['content']}" th:text="content + ${errors['content']}"></p>
+                    <p class="error-message" th:if="${errors['content']}" th:text="'content ' + ${errors['content']}"></p>
                     <label class="label" for="tags">
                         Tags
                     </label>

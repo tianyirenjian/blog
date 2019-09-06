@@ -22,4 +22,19 @@ public class PostManageService {
         post.setUpdated(Instant.now());
         postRepository.save(post);
     }
+
+    public Post getPost(String id) {
+        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Post not found."));
+    }
+
+    public void updatePost(Post post) {
+        Post old = this.getPost(post.getId());
+        post.setCreated(old.getCreated());
+        post.setUpdated(Instant.now());
+        postRepository.save(post);
+    }
+
+    public void deletePost(String id) {
+        postRepository.deleteById(id);
+    }
 }

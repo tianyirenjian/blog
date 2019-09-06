@@ -3,12 +3,10 @@ package xyz.goenitz.blog.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -19,8 +17,6 @@ public class Post {
 
     @NotEmpty
     private String title, content, description;
-
-    private String slug;
 
     private long views;
 

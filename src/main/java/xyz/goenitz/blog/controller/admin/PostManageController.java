@@ -22,10 +22,12 @@ import java.util.Map;
 public class PostManageController {
     @Autowired
     private PostManageService postManageService;
+
     @ModelAttribute
     public void addAttributes(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("username", principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : principal.toString());
+        model.addAttribute("errors", new HashMap<>());
     }
 
     @GetMapping
@@ -37,7 +39,6 @@ public class PostManageController {
 
     @GetMapping("create")
     public String create(Model model) {
-        model.addAttribute("errors", new HashMap<>());
         model.addAttribute("title", "New post");
         model.addAttribute("post", new Post());
         return "admin/post-add";
@@ -47,7 +48,7 @@ public class PostManageController {
     public String store(@Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
-            for (FieldError fieldError: bindingResult.getFieldErrors()) {
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 errors.put(fieldError.getField(), fieldError.getDefaultMessage());
             }
             model.addAttribute("title", "New post");
@@ -55,8 +56,42 @@ public class PostManageController {
             model.addAttribute("errors", errors);
             return "admin/post-add";
         }
+        System.out.println(post);
         postManageService.createPost(post);
-        ra.addAttribute("created", true);
+        ra.addFlashAttribute("action", "created");
+        return "redirect:/admin/posts";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable(name = "id") String id, Model model) {
+        Post post = postManageService.getPost(id);
+        model.addAttribute("title", "Edit post");
+        model.addAttribute("post", post);
+        return "admin/post-add";
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable(name = "id") String id, @Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            model.addAttribute("title", "Edit post");
+            model.addAttribute("post", post);
+            model.addAttribute("errors", errors);
+            return "admin/post-add";
+        }
+        System.out.println(post);
+        postManageService.updatePost(post);
+        ra.addFlashAttribute("action", "updated");
+        return "redirect:/admin/posts";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable(name = "id") String id, RedirectAttributes ra) {
+        postManageService.deletePost(id);
+        ra.addFlashAttribute("action", "deleted");
         return "redirect:/admin/posts";
     }
 }

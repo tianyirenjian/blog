@@ -9,7 +9,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-<div th:fragment="header">
+<th:block th:fragment="header">
     <header class="flex justify-between bg-blue-600 text-white h-16">
         <div class="mx-4 h-full text-2xl font-hairline" style="line-height:3.9rem;">Goenitz</div>
         <div class="mx-4 text-gray-100 text-sm" style="line-height:3.9rem;">
@@ -17,6 +17,6 @@
             <a class="text-blue-400" th:href="@{/logout}">logout.</a>
         </div>
     </header>
-</div>
+</th:block>
 </body>
 </html>
