@@ -7,12 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${title}"></title>
     <th:block th:insert="admin/fragments/style::style"></th:block>
+    <link rel="stylesheet" href="/md/md.min.css">
 </head>
 <body class="min-h-full flex flex-col text-gray-900">
     <th:block th:insert="admin/fragments/header::header"></th:block>
     <div class="main flex flex-row flex-1">
         <div class="slider w-1/6 p-2 bg-gray-800 text-gray-100 text-lg" th:insert="admin/fragments/slider::slider"></div>
-        <div class="body w-2/5 p-3 flex flex-col">
+        <div class="body w-3/5 p-3 flex flex-col">
             <div class="flex-1">
                 <h1 class="text-lg font-bold"><span th:text="${title}"></span> <small><a class="text-blue-400" th:href="@{/admin/posts}">Back to list</a></small></h1>
                 <form class="mt-2" th:action="${post.id} ? @{/admin/posts/{id}/update(id=${post.id})} : @{/admin/posts}" method="post" th:object="${post}">
@@ -29,7 +30,7 @@
                     <label class="label" for="content">
                         Content
                     </label>
-                    <textarea id="content" rows="10" th:field="*{content}" class="input"></textarea>
+                    <textarea id="content" rows="12" th:field="*{content}" class="input input-important"></textarea>
                     <p class="error-message" th:if="${errors['content']}" th:text="'content ' + ${errors['content']}"></p>
                     <label class="label" for="tags">
                         Tags
@@ -45,5 +46,16 @@
             <div th:replace="admin/fragments/footer::footer">footer</div>
         </div>
     </div>
+    <script src="/md/md.min.js"></script>
+    <script>
+        var element = document.getElementById('content');
+        var settings = {};
+        var editor = new Editor(element, settings);
+        editor.init();
+        window.onload = function () {
+            document.getElementById('content').scrollTop = 0;
+            document.getElementById('title').focus();
+        }
+    </script>
 </body>
 </html>
