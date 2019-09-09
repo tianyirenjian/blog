@@ -1,6 +1,7 @@
 package xyz.goenitz.blog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,11 @@ import xyz.goenitz.blog.model.Post;
 import xyz.goenitz.blog.service.PostManageService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @ControllerAdvice
@@ -31,9 +36,17 @@ public class PostManageController {
     }
 
     @GetMapping
-    public String index(Model model) {
+    public String index( Model model, @RequestParam("page") Optional<Integer> page) {
+        int currentPage = page.orElse(1);
         model.addAttribute("title", "Posts");
-        model.addAttribute("posts", postManageService.getPostList());
+        Page<Post> posts = postManageService.getPostList(currentPage);
+        model.addAttribute("posts", posts);
+        int totalPage = posts.getTotalPages();
+        if (totalPage > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         return "admin/posts";
     }
 

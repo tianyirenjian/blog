@@ -47,3 +47,19 @@ html {
 .alert-success {
     @apply my-3 w-full p-2 pl-3 bg-green-500 text-white rounded;
 }
+
+.pagination {
+    @apply flex my-2;
+}
+
+.pagination a{
+    @apply block px-3 py-1 text-white bg-gray-700 mx-1;
+}
+
+.pagination a:hover{
+    @apply bg-gray-400 text-gray-900;
+}
+
+.pagination a.active{
+    @apply bg-gray-400 text-gray-900;
+}

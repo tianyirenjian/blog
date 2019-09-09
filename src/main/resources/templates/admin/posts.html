@@ -26,7 +26,7 @@
                         <th class="th">Updated</th>
                         <th class="th">Action</th>
                     </tr>
-                    <th:block th:each="post: ${posts}">
+                    <th:block th:each="post: ${posts.content}">
                     <tr class="border border-gray-400">
                         <td class="td" th:text="${post.id}"></td>
                         <td class="td" th:text="${post.title}">title</td>
@@ -41,6 +41,13 @@
                     </tr>
                     </th:block>
                 </table>
+                <div th:if="${posts.totalPages > 0}" class="pagination">
+                    <th:block th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{/admin/posts(page=${pageNumber})}"
+                           th:text="${pageNumber}"
+                           th:class="${pageNumber==posts.number + 1} ? active"></a>
+                    </th:block>
+                </div>
             </div>
             <div th:replace="admin/fragments/footer::footer">footer</div>
         </div>

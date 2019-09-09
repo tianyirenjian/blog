@@ -1,20 +1,24 @@
 package xyz.goenitz.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.goenitz.blog.model.Post;
 import xyz.goenitz.blog.repository.PostRepository;
 
 import java.time.Instant;
-import java.util.List;
 
 @Service
 public class PostManageService {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> getPostList() {
-        return postRepository.findAll();
+    public Page<Post> getPostList(int page) {
+        int size = 10;
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return postRepository.findAll(pageable);
     }
 
     public void createPost(Post post) {
