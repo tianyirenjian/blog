@@ -66,4 +66,17 @@ html {
     @apply bg-gray-400 text-gray-900;
 }
 
+.CodeMirror,
+.CodeMirror-scroll {
+    max-height: 350px;
+}
+
+.CodeMirror-fullscreen.CodeMirror {
+    max-height: none;
+}
+
+.CodeMirror-fullscreen .CodeMirror-scroll {
+    max-height: none;
+}
+
 @tailwind utilities;

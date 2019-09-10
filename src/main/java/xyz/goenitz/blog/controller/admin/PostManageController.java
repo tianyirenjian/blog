@@ -69,7 +69,6 @@ public class PostManageController {
             model.addAttribute("errors", errors);
             return "admin/post-add";
         }
-        System.out.println(post);
         postManageService.createPost(post);
         ra.addFlashAttribute("action", "created");
         return "redirect:/admin/posts";
@@ -95,7 +94,6 @@ public class PostManageController {
             model.addAttribute("errors", errors);
             return "admin/post-add";
         }
-        System.out.println(post);
         postManageService.updatePost(post);
         ra.addFlashAttribute("action", "updated");
         return "redirect:/admin/posts";
