@@ -9,16 +9,20 @@ import xyz.goenitz.blog.model.Post;
 import xyz.goenitz.blog.repository.PostRepository;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Service
 public class PostManageService {
     @Autowired
     private PostRepository postRepository;
 
-    public Page<Post> getPostList(int page) {
-        int size = 10;
+    public Page<Post> getPostList(int page, String keyword) {
+        int size = 1;
         Pageable pageable = PageRequest.of(page - 1, size);
-        return postRepository.findAll(pageable);
+        if (keyword == null) {
+            return postRepository.findAll(pageable);
+        }
+        return postRepository.findPostsByRegexpTitle(keyword, pageable);
     }
 
     public void createPost(Post post) {

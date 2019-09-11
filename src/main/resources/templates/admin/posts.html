@@ -15,6 +15,7 @@
         <div class="body w-5/6 p-3 flex flex-col">
             <div class="flex-1">
                 <h1 class="text-lg font-bold">Posts <small><a class="text-blue-400" th:href="@{/admin/posts/create}">new post</a></small></h1>
+                <hr class="border mt-2 mb-3">
                 <div class="alert-success" th:if="${action}" th:text="'Successfully ' + ${action} + ."></div>
                 <table class="border-collapse w-full mt-2">
                     <tr>
@@ -43,7 +44,7 @@
                 </table>
                 <div th:if="${posts.totalPages > 0}" class="pagination">
                     <th:block th:each="pageNumber : ${pageNumbers}">
-                        <a th:href="@{/admin/posts(page=${pageNumber})}"
+                        <a th:href="@{/admin/posts(page=${pageNumber})} + ${queryString}"
                            th:text="${pageNumber}"
                            th:class="${pageNumber==posts.number + 1} ? active"></a>
                     </th:block>

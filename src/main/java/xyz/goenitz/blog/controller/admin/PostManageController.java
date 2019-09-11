@@ -36,10 +36,17 @@ public class PostManageController {
     }
 
     @GetMapping
-    public String index( Model model, @RequestParam("page") Optional<Integer> page) {
-        int currentPage = page.orElse(1);
+    public String index(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("keyword") Optional<String> keyword) {
         model.addAttribute("title", "Posts");
-        Page<Post> posts = postManageService.getPostList(currentPage);
+        StringBuffer sb = new StringBuffer();
+
+        int currentPage = page.orElse(1);
+        String title = keyword.orElse(null);
+        if (title != null) {
+            sb.append("&keyword=" + title);
+        }
+        model.addAttribute("queryString", sb.toString());
+        Page<Post> posts = postManageService.getPostList(currentPage, title);
         model.addAttribute("posts", posts);
         int totalPage = posts.getTotalPages();
         if (totalPage > 0) {
