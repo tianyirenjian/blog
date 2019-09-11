@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,4 +14,6 @@ const mix = require('laravel-mix');
 
 mix.postCss('src/res/app.css', 'src/main/resources/static/app.css', [
     require('tailwindcss'),
-])
+]).purgeCss({
+    folders: ['src/main/resources/templates'],
+});
