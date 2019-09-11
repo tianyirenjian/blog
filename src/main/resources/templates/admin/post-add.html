@@ -8,6 +8,20 @@
     <title th:text="${title}"></title>
     <th:block th:insert="admin/fragments/style::style"></th:block>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style>
+        .CodeMirror,
+        .CodeMirror-scroll {
+            max-height: 350px;
+        }
+
+        .CodeMirror-fullscreen.CodeMirror {
+            max-height: none;
+        }
+
+        .CodeMirror-fullscreen .CodeMirror-scroll {
+            max-height: none;
+        }
+    </style>
 </head>
 <body class="min-h-full flex flex-col text-gray-900">
     <th:block th:insert="admin/fragments/header::header"></th:block>
@@ -16,6 +30,7 @@
         <div class="body w-3/5 p-3 flex flex-col">
             <div class="flex-1">
                 <h1 class="text-lg font-bold"><span th:text="${title}"></span> <small><a class="text-blue-400" th:href="@{/admin/posts}">Back to list</a></small></h1>
+                <hr class="border mt-2 mb-3">
                 <form class="mt-2" th:action="${post.id} ? @{/admin/posts/{id}/update(id=${post.id})} : @{/admin/posts}" method="post" th:object="${post}">
                     <label class="label" for="title">
                         Title
