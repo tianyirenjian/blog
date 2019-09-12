@@ -16,6 +16,15 @@
             <div class="flex-1">
                 <h1 class="text-lg font-bold">Posts <small><a class="text-blue-400" th:href="@{/admin/posts/create}">new post</a></small></h1>
                 <hr class="border mt-2 mb-3">
+                <form action="" class="flex text-sm">
+                    <div class="mr-2 self-center">关键字：</div>
+                    <div class="mr-2">
+                        <input type="text" name="keyword" class="input" th:value="${keyword}">
+                    </div>
+                    <div class="mr-2">
+                        <button class="btn" type="submit">搜索</button>
+                    </div>
+                </form>
                 <div class="alert-success" th:if="${action}" th:text="'Successfully ' + ${action} + ."></div>
                 <table class="border-collapse w-full mt-2">
                     <tr>

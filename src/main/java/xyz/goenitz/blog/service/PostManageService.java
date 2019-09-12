@@ -9,7 +9,6 @@ import xyz.goenitz.blog.model.Post;
 import xyz.goenitz.blog.repository.PostRepository;
 
 import java.time.Instant;
-import java.util.Optional;
 
 @Service
 public class PostManageService {
@@ -17,7 +16,7 @@ public class PostManageService {
     private PostRepository postRepository;
 
     public Page<Post> getPostList(int page, String keyword) {
-        int size = 1;
+        int size = 10;
         Pageable pageable = PageRequest.of(page - 1, size);
         if (keyword == null) {
             return postRepository.findAll(pageable);
