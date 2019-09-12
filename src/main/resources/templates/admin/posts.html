@@ -11,7 +11,7 @@
 <body class="min-h-full flex flex-col text-gray-900">
     <th:block th:insert="admin/fragments/header::header"></th:block>
     <div class="main flex flex-row flex-1">
-        <div class="slider w-1/6 p-2 bg-gray-800 text-gray-100 text-lg" th:insert="admin/fragments/slider::slider"></div>
+        <div class="slider w-1/6 p-2 bg-gray-800 text-lg" th:insert="admin/fragments/sider::sider"></div>
         <div class="body w-5/6 p-3 flex flex-col">
             <div class="flex-1">
                 <h1 class="text-lg font-bold">Posts <small><a class="text-blue-400" th:href="@{/admin/posts/create}">new post</a></small></h1>
@@ -41,12 +41,14 @@
                         <td class="td" th:text="${post.id}"></td>
                         <td class="td" th:text="${post.title}">title</td>
                         <td class="td" th:text="${post.views}">views</td>
-                        <td class="td" th:text="${post.tags}">tags</td>
+                        <td class="td">
+                            <a class="mr-1" th:each="tag: ${post.tags}" th:href="'?tag=' + ${tag}" th:text="${tag}"></a>
+                        </td>
                         <td class="td" th:text="${#dates.format(post.created, 'yyyy-MM-dd HH:mm:ss')}">created</td>
                         <td class="td" th:text="${#dates.format(post.updated, 'yyyy-MM-dd HH:mm:ss')}">updated</td>
                         <td class="td">
-                            <a class="mx-1 hover:text-blue-400" th:href="@{/admin/posts/{id}/edit(id=${post.id})}">edit</a>
-                            <a onclick="return confirm('Are you sure you want to delete it?');" class="mx-1 hover:text-blue-400" th:href="@{/admin/posts/{id}/delete(id=${post.id})}">delete</a>
+                            <a class="mx-1" th:href="@{/admin/posts/{id}/edit(id=${post.id})}">edit</a>
+                            <a onclick="return confirm('Are you sure you want to delete it?');" class="mx-1" th:href="@{/admin/posts/{id}/delete(id=${post.id})}">delete</a>
                         </td>
                     </tr>
                     </th:block>

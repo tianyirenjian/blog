@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,22 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-<th:block th:fragment="slider">
+<th:block th:fragment="sider">
     <ul>
         <li>
-            <a href="#" class="p-1 block hover:bg-gray-700">Dashboard</a>
+            <a href="#" class="siderLink ">Dashboard</a>
         </li>
         <li>
-            <a th:href="@{/admin/posts}" class="p-1 block hover:bg-gray-700">Posts</a>
+            <a th:href="@{/admin/posts}" class="siderLink">Posts</a>
         </li>
         <li>
-            <a href="#" class="p-1 block hover:bg-gray-700">Tags</a>
+            <a href="#" class="siderLink">Tags</a>
         </li>
         <li>
-            <a href="#" class="p-1 block hover:bg-gray-700">Links</a>
+            <a href="#" class="siderLink">Links</a>
         </li>
         <li>
-            <a href="#" class="p-1 block hover:bg-gray-700">Settings</a>
+            <a href="#" class="siderLink">Settings</a>
         </li>
     </ul>
 </th:block>

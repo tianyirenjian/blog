@@ -6,6 +6,22 @@ html {
     height: 100%;
 }
 
+a{
+    @apply text-blue-600;
+}
+a:hover{
+    @apply text-blue-400;
+}
+
+.siderLink {
+    @apply p-1 block text-gray-100;
+}
+
+
+.siderLink:hover {
+    @apply text-gray-100 bg-gray-700;
+}
+
 .th {
     @apply border border-gray-400 p-2;
 }

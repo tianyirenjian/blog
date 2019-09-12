@@ -15,13 +15,16 @@ public class PostManageService {
     @Autowired
     private PostRepository postRepository;
 
-    public Page<Post> getPostList(int page, String keyword) {
+    public Page<Post> getPostList(int page, String keyword, String tag) {
         int size = 10;
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword == null) {
-            return postRepository.findAll(pageable);
+        if (keyword != null) {
+            return postRepository.findPostsByRegexpTitle(keyword, pageable);
         }
-        return postRepository.findPostsByRegexpTitle(keyword, pageable);
+        if (tag != null) {
+            return postRepository.findByTags(tag, pageable);
+        }
+        return postRepository.findAll(pageable);
     }
 
     public void createPost(Post post) {
