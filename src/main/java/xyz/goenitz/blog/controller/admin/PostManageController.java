@@ -23,7 +23,6 @@ import java.util.stream.IntStream;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/admin/posts")
 public class PostManageController {
     @Autowired
     private PostManageService postManageService;
@@ -35,7 +34,7 @@ public class PostManageController {
         model.addAttribute("errors", new HashMap<>());
     }
 
-    @GetMapping
+    @GetMapping("/admin/posts")
     public String index(Model model, @RequestParam("page") Optional<Integer> page,
                         @RequestParam("keyword") Optional<String> keyword, @RequestParam("tag") Optional<String> tag) {
         model.addAttribute("title", "Posts");
@@ -63,14 +62,14 @@ public class PostManageController {
         return "admin/posts";
     }
 
-    @GetMapping("create")
+    @GetMapping("/admin/posts/create")
     public String create(Model model) {
         model.addAttribute("title", "New post");
         model.addAttribute("post", new Post());
         return "admin/post-add";
     }
 
-    @PostMapping
+    @PostMapping("/admin/posts")
     public String store(@Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
@@ -87,7 +86,7 @@ public class PostManageController {
         return "redirect:/admin/posts";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/admin/posts/{id}/edit")
     public String edit(@PathVariable(name = "id") String id, Model model) {
         Post post = postManageService.getPost(id);
         model.addAttribute("title", "Edit post");
@@ -95,7 +94,7 @@ public class PostManageController {
         return "admin/post-add";
     }
 
-    @PostMapping("/{id}/update")
+    @PostMapping("/admin/posts/{id}/update")
     public String update(@PathVariable(name = "id") String id, @Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
@@ -112,10 +111,18 @@ public class PostManageController {
         return "redirect:/admin/posts";
     }
 
-    @GetMapping("/{id}/delete")
+    @GetMapping("/admin/posts/{id}/delete")
     public String delete(@PathVariable(name = "id") String id, RedirectAttributes ra) {
         postManageService.deletePost(id);
         ra.addFlashAttribute("action", "deleted");
         return "redirect:/admin/posts";
+    }
+
+    @GetMapping("admin/tags")
+    public String tags(Model model) {
+        List<Object> tags = postManageService.getAllTags();
+        model.addAttribute("title", "Tags");
+        model.addAttribute("tags", tags);
+        return "admin/tags";
     }
 }

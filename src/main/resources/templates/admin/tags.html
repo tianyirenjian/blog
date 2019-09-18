@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}"></title>
+    <th:block th:insert="admin/fragments/style::style"></th:block>
+</head>
+<body class="min-h-full flex flex-col text-gray-900">
+<th:block th:insert="admin/fragments/header::header"></th:block>
+<div class="main flex flex-row flex-1">
+    <div class="slider w-1/6 p-2 bg-gray-800 text-lg" th:insert="admin/fragments/sider::sider"></div>
+    <div class="body w-2/6 p-3 flex flex-col">
+        <div class="flex-1">
+            <h1 class="text-lg font-bold">Tags</h1>
+            <hr class="border mt-2 mb-3">
+            <table class="border-collapse w-full mt-2">
+                <tr>
+                    <th class="th">#</th>
+                    <th class="th">Tag</th>
+                    <th class="th">Post Count</th>
+                </tr>
+                <th:block th:each="tag, iter: ${tags}">
+                    <tr class="border border-gray-400">
+                        <td class="td" th:text="${iter.index + 1}"></td>
+                        <td class="td"><a th:href="'/admin/posts?tag=' + ${tag._id}" th:text="${tag._id}"></a></td>
+                        <td class="td" th:text="${tag.count}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+        <div th:replace="admin/fragments/footer::footer">footer</div>
+    </div>
+</div>
+</body>
+</html>
