@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}"></title>
+    <th:block th:insert="admin/fragments/style::style"></th:block>
+</head>
+<body class="min-h-full flex flex-col text-gray-900">
+<th:block th:insert="admin/fragments/header::header"></th:block>
+<div class="main flex flex-row flex-1">
+    <div class="slider w-1/6 p-2 bg-gray-800 text-lg" th:insert="admin/fragments/sider::sider"></div>
+    <div class="body w-2/6 p-3 flex flex-col">
+        <div class="flex-1">
+            <h1 class="text-lg font-bold">Links <small><a class="text-blue-400" th:href="@{/admin/links/create}">new link</a></small></h1>
+            <hr class="border mt-2 mb-3">
+            <div class="alert-success" th:if="${action}" th:text="'Successfully ' + ${action} + ."></div>
+            <table class="border-collapse w-full mt-2">
+                <tr>
+                    <th class="th">#</th>
+                    <th class="th">Name</th>
+                    <th class="th">Url</th>
+                    <th class="th">Sort</th>
+                    <th class="th">Action</th>
+                </tr>
+                <th:block th:each="link, iter: ${links}">
+                    <tr class="border border-gray-400">
+                        <td class="td" th:text="${iter.index + 1}"></td>
+                        <td class="td" th:text="${link.name}"></td>
+                        <td class="td" th:text="${link.url}"></td>
+                        <td class="td" th:text="${link.sort}"></td>
+                        <td class="td">
+                            <a class="mx-1" th:href="@{/admin/links/{id}/edit(id=${link.id})}">edit</a>
+                            <a onclick="return confirm('Are you sure you want to delete it?');" class="mx-1" th:href="@{/admin/links/{id}/delete(id=${link.id})}">delete</a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+        <div th:replace="admin/fragments/footer::footer">footer</div>
+    </div>
+</div>
+</body>
+</html>

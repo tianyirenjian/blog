@@ -22,17 +22,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@ControllerAdvice
-public class PostManageController {
+public class PostManageController extends ManageController {
     @Autowired
     private PostManageService postManageService;
-
-    @ModelAttribute
-    public void addAttributes(Model model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("username", principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : principal.toString());
-        model.addAttribute("errors", new HashMap<>());
-    }
 
     @GetMapping("/admin/posts")
     public String index(Model model, @RequestParam("page") Optional<Integer> page,
@@ -72,13 +64,9 @@ public class PostManageController {
     @PostMapping("/admin/posts")
     public String store(@Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
             model.addAttribute("title", "New post");
             model.addAttribute("post", post);
-            model.addAttribute("errors", errors);
+            model.addAttribute("errors", this.getErrors(bindingResult));
             return "admin/post-add";
         }
         postManageService.createPost(post);
@@ -87,8 +75,7 @@ public class PostManageController {
     }
 
     @GetMapping("/admin/posts/{id}/edit")
-    public String edit(@PathVariable(name = "id") String id, Model model) {
-        Post post = postManageService.getPost(id);
+    public String edit(@PathVariable(name = "id") Post post, Model model) {
         model.addAttribute("title", "Edit post");
         model.addAttribute("post", post);
         return "admin/post-add";
@@ -97,13 +84,9 @@ public class PostManageController {
     @PostMapping("/admin/posts/{id}/update")
     public String update(@PathVariable(name = "id") String id, @Validated Post post, BindingResult bindingResult, Model model, RedirectAttributes ra) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
-            }
             model.addAttribute("title", "Edit post");
             model.addAttribute("post", post);
-            model.addAttribute("errors", errors);
+            model.addAttribute("errors", this.getErrors(bindingResult));
             return "admin/post-add";
         }
         postManageService.updatePost(post);
