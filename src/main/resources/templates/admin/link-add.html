@@ -7,14 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${title}"></title>
     <th:block th:insert="admin/fragments/style::style"></th:block>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <style>
-        .CodeMirror, .CodeMirror-scroll { max-height: 350px; }
-        .CodeMirror-fullscreen.CodeMirror { max-height: none; }
-        .CodeMirror-fullscreen .CodeMirror-scroll { max-height: none; }
-        .editor-preview-side p{line-height: 2.0rem;}
-        .editor-preview-side ul{margin-top:16px; margin-bottom:16px;padding-left:40px;list-style:disc;}
-    </style>
 </head>
 <body class="min-h-full flex flex-col text-gray-900">
     <th:block th:insert="admin/fragments/header::header"></th:block>
@@ -54,12 +46,5 @@
             <div th:replace="admin/fragments/footer::footer">footer</div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script>
-        var simplemde = new SimpleMDE({
-            element: document.getElementById("content"),
-            spellChecker: false
-        });
-    </script>
 </body>
 </html>
