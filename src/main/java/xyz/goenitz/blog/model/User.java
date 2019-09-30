@@ -2,21 +2,23 @@ package xyz.goenitz.blog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends Model{
     @Id
     private String id;
 
     private String username, password;
 
-    private Instant lastLogin, created, updated;
+    private Instant lastLogin;
 
     public User(String username, String password) {
         this.setUsername(username);

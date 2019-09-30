@@ -1,6 +1,7 @@
 package xyz.goenitz.blog.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -9,9 +10,10 @@ import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class Post {
+public class Post extends Model {
     @Id
     private String id;
 
@@ -25,5 +27,4 @@ public class Post {
 
     private List<String> tags;
 
-    private Instant created, updated;
 }

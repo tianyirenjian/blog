@@ -20,7 +20,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.grou
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
 
 @Service
-public class PostManageService {
+public class PostManageService extends ManageService{
     @Autowired
     private PostRepository postRepository;
 
@@ -40,8 +40,7 @@ public class PostManageService {
     }
 
     public void createPost(Post post) {
-        post.setCreated(Instant.now());
-        post.setUpdated(Instant.now());
+        beforeCreate(post);
         postRepository.save(post);
     }
 
@@ -51,8 +50,7 @@ public class PostManageService {
 
     public void updatePost(Post post) {
         Post old = this.getPost(post.getId());
-        post.setCreated(old.getCreated());
-        post.setUpdated(Instant.now());
+        beforeUpdate(post, old);
         postRepository.save(post);
     }
 

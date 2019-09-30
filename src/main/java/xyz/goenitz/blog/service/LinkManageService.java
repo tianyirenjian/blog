@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Service
-public class LinkManageService {
+public class LinkManageService extends ManageService{
     @Autowired
     private LinkRepository linkRepository;
 
@@ -19,8 +19,7 @@ public class LinkManageService {
     }
 
     public void createLink(Link link) {
-        link.setCreated(Instant.now());
-        link.setUpdated(Instant.now());
+        beforeCreate(link);
         linkRepository.save(link);
     }
 
@@ -30,8 +29,7 @@ public class LinkManageService {
 
     public void updateLink(Link link) {
         Link old = this.getLink(link.getId());
-        link.setCreated(old.getCreated());
-        link.setUpdated(Instant.now());
+        beforeUpdate(link, old);
         linkRepository.save(link);
     }
 
