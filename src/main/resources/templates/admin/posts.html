@@ -25,7 +25,7 @@
                         <button class="btn" type="submit">搜索</button>
                     </div>
                 </form>
-                <div class="alert-success" th:if="${action}" th:text="'Successfully ' + ${action} + ."></div>
+                <th:block  th:if="${action}" th:insert="admin/fragments/alert::alert"></th:block>
                 <table class="border-collapse w-full mt-2">
                     <tr>
                         <th class="th">ID</th>

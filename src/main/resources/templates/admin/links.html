@@ -16,7 +16,7 @@
         <div class="flex-1">
             <h1 class="text-lg font-bold">Links <small><a class="text-blue-400" th:href="@{/admin/links/create}">new link</a></small></h1>
             <hr class="border mt-2 mb-3">
-            <div class="alert-success" th:if="${action}" th:text="'Successfully ' + ${action} + ."></div>
+            <th:block  th:if="${action}" th:insert="admin/fragments/alert::alert"></th:block>
             <table class="border-collapse w-full mt-2">
                 <tr>
                     <th class="th">#</th>
