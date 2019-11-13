@@ -14,30 +14,63 @@
     <div class="slider w-1/6 p-2 bg-gray-800 text-lg" th:insert="admin/fragments/sider::sider"></div>
     <div class="body w-2/3 p-3 flex flex-col">
         <div class="flex-1">
-            <h1 class="text-lg font-bold">Settings <small><a class="text-blue-400" th:href="@{/admin/settings/create}">new setting</a></small></h1>
+            <h1 class="text-lg font-bold">Settings</h1>
             <hr class="border mt-2 mb-3">
             <th:block  th:if="${action}" th:insert="admin/fragments/alert::alert"></th:block>
-            <table class="border-collapse w-full mt-2">
-                <tr>
-                    <th class="th">#</th>
-                    <th class="th">name</th>
-                    <th class="th">key</th>
-                    <th class="th">value</th>
-                    <th class="th">Action</th>
-                </tr>
-                <th:block th:each="setting, iter: ${settings}">
-                    <tr class="border border-gray-400">
-                        <td class="td" th:text="${iter.index + 1}"></td>
-                        <td class="td" th:text="${setting.name}"></td>
-                        <td class="td" th:text="${setting.key}"></td>
-                        <td class="td" th:text="${setting.value}"></td>
-                        <td class="td">
-                            <a class="mx-1" th:href="@{/admin/settings/{id}/edit(id=${setting.id})}">edit</a>
-                            <a onclick="return confirm('Are you sure you want to delete it?');" class="mx-1" th:href="@{/admin/settings/{id}/delete(id=${setting.id})}">delete</a>
-                        </td>
-                    </tr>
-                </th:block>
-            </table>
+            <form class="mt-2" th:action="@{/admin/settings}" method="post" th:object="${setting}">
+                <input type="hidden" id="id" th:field="*{id}">
+                <label class="label" for="webName">
+                    Web name
+                </label>
+                <input type="text" id="webName" placeholder="Web name" th:field="*{webName}" class="input">
+                <p class="error-message" th:if="${errors['webName']}" th:text="'Web name ' + ${errors['webName']}"></p>
+                <label class="label" for="title">
+                    Title
+                </label>
+                <input type="text" id="title" placeholder="Title" th:field="*{title}" class="input">
+                <p class="error-message" th:if="${errors['title']}" th:text="'title ' + ${errors['title']}"></p>
+                <label class="label" for="keywords">
+                    keywords
+                </label>
+                <input type="text" id="keywords" placeholder="keywords" th:field="*{keywords}" class="input">
+                <p class="error-message" th:if="${errors['keywords']}" th:text="'keywords ' + ${errors['keywords']}"></p>
+                <label class="label" for="description">
+                    Description
+                </label>
+                <textarea id="description" rows="3" th:field="*{description}" class="input"></textarea>
+                <p class="error-message" th:if="${errors['description']}" th:text="'description ' + ${errors['description']}"></p>
+                <div class="md:flex md:items-center mb-6">
+                    <label class="md:w-2/3 block text-gray-500 font-bold">
+                        <input class="mr-2 leading-tight" type="checkbox" th:field="*{maintenance}">
+                        <span class="text-sm">
+                            Maintenance mode.
+                      </span>
+                    </label>
+                </div>
+                <div class="md:flex md:items-center mb-6">
+                    <label class="md:w-2/3 block text-gray-500 font-bold">
+                        <input class="mr-2 leading-tight" type="checkbox" th:field="*{showContentInList}">
+                        <span class="text-sm">
+                            Show post content in list.
+                      </span>
+                    </label>
+                </div>
+                <label class="label" for="perPage">
+                    Per Page
+                </label>
+                <input type="number" id="perPage" placeholder="Per Page" th:field="*{perPage}" class="input">
+                <label class="label" for="header">
+                    Header
+                </label>
+                <textarea id="header" rows="3" th:field="*{header}" class="input"></textarea>
+                <label class="label" for="footer">
+                    Footer
+                </label>
+                <textarea id="footer" rows="3" th:field="*{footer}" class="input"></textarea>
+                <button class="sbtn" type="submit">
+                    Submit
+                </button>
+            </form>
         </div>
         <div th:replace="admin/fragments/footer::footer">footer</div>
     </div>

@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+
 
 @Data
 @AllArgsConstructor
@@ -14,9 +15,12 @@ public class Setting {
     @Id
     private String id;
 
-    @NotNull
-    private String key;
-
-    @NotNull
-    private String name, value;
+    @NotEmpty
+    private String webName;
+    private String title, keywords, description;
+    private Boolean maintenance = false;
+    private Boolean showContentInList = false;
+    private Integer perPage = 6;
+    private String header;
+    private String footer;
 }

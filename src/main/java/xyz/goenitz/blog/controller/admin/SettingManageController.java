@@ -24,16 +24,9 @@ public class SettingManageController extends ManageController {
     @GetMapping("/admin/settings")
     public String index(Model model) {
         model.addAttribute("title", "Settings");
-        List<Setting> settings = settingService.getAll();
-        model.addAttribute("settings", settings);
+        Setting setting = settingService.get();
+        model.addAttribute("setting", setting);
         return "admin/settings";
-    }
-
-    @GetMapping("/admin/settings/create")
-    public String create(Model model) {
-        model.addAttribute("title", "Add setting");
-        model.addAttribute("setting", new Setting());
-        return "admin/setting-add";
     }
 
     @PostMapping("/admin/settings")
@@ -42,37 +35,10 @@ public class SettingManageController extends ManageController {
             model.addAttribute("title", "Add Setting");
             model.addAttribute("setting", setting);
             model.addAttribute("errors", getErrors(bindingResult));
-            return "admin/setting-add";
+            return "admin/settings";
         }
-        settingService.set(setting);
-        ra.addFlashAttribute("action", "created");
-        return "redirect:/admin/settings";
-    }
-
-    @GetMapping("/admin/settings/{id}/edit")
-    public String edit(@PathVariable(name = "id") Setting setting, Model model) {
-        model.addAttribute("title", "Edit setting");
-        model.addAttribute("setting", setting);
-        return "admin/setting-add";
-    }
-
-    @PostMapping("/admin/settings/{id}/update")
-    public String update(@Validated Setting setting, BindingResult bindingResult, Model model, RedirectAttributes ra) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("title", "Edit setting");
-            model.addAttribute("setting", setting);
-            model.addAttribute("errors", getErrors(bindingResult));
-            return "admin/setting-add";
-        }
-        settingService.set(setting);
-        ra.addFlashAttribute("action", "updated");
-        return "redirect:/admin/settings";
-    }
-
-    @GetMapping("/admin/settings/{id}/delete")
-    public String delete(@PathVariable(name = "id") String id, RedirectAttributes ra) {
-        settingService.delete(id);
-        ra.addFlashAttribute("action", "deleted");
+        settingService.save(setting);
+        ra.addFlashAttribute("action", "saved");
         return "redirect:/admin/settings";
     }
 }
